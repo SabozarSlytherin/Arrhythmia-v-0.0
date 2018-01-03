@@ -1,0 +1,326 @@
+fileFormatVersion: 2
+guid: 37776ce49e1780e43ad1d579d7b6fa13
+timeCreated: 1514883862
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: B_bicep_left
+    100004: b_bicep_right
+    100006: b_fingers_left
+    100008: b_fingers_right
+    100010: b_foot_left
+    100012: b_foot_right
+    100014: B_forearm_left
+    100016: b_forearm_right
+    100018: b_hand_left
+    100020: b_hand_right
+    100022: b_head
+    100024: b_neck
+    100026: b_pelvis
+    100028: b_pelvis_left
+    100030: b_pelvis_right
+    100032: b_pine_up
+    100034: b_shin_left
+    100036: b_shin_right
+    100038: b_spine_low
+    100040: b_thigh_left
+    100042: b_thigh_right
+    100044: b_toe_left
+    100046: b_toe_right
+    100048: Bone026
+    100050: Bone027
+    100052: Bone028
+    100054: Bone029
+    100056: Bone030
+    100058: Bone041
+    100060: Bone043
+    100062: Bone044
+    100064: Bone045
+    100066: Bone046
+    100068: Bone047
+    100070: Bone048
+    100072: Bone049
+    100074: Bone050
+    100076: Bone051
+    100078: Bone052
+    100080: Bone053
+    100082: Bone054
+    100084: Bone055
+    100086: Bone056
+    100088: Bone057
+    100090: Bone058
+    100092: Bone059
+    100094: Bone060
+    100096: Bone061
+    100098: Box001
+    100100: Box002
+    100102: Box003
+    100104: Box004
+    100106: Box005
+    100108: Box006
+    100110: Box007
+    100112: Box008
+    100114: Box009
+    100116: Box010
+    100118: Box011
+    100120: Box012
+    100122: Box013
+    100124: Box014
+    100126: Box015
+    100128: Box016
+    100130: Box017
+    100132: Box018
+    100134: Box020
+    100136: Chest_left
+    100138: Chest_right
+    100140: IK Chain001
+    100142: IK Chain002
+    100144: IK Chain003
+    100146: IK Chain004
+    100148: Model_1
+    100150: Pelvis
+    400000: //RootNode
+    400002: B_bicep_left
+    400004: b_bicep_right
+    400006: b_fingers_left
+    400008: b_fingers_right
+    400010: b_foot_left
+    400012: b_foot_right
+    400014: B_forearm_left
+    400016: b_forearm_right
+    400018: b_hand_left
+    400020: b_hand_right
+    400022: b_head
+    400024: b_neck
+    400026: b_pelvis
+    400028: b_pelvis_left
+    400030: b_pelvis_right
+    400032: b_pine_up
+    400034: b_shin_left
+    400036: b_shin_right
+    400038: b_spine_low
+    400040: b_thigh_left
+    400042: b_thigh_right
+    400044: b_toe_left
+    400046: b_toe_right
+    400048: Bone026
+    400050: Bone027
+    400052: Bone028
+    400054: Bone029
+    400056: Bone030
+    400058: Bone041
+    400060: Bone043
+    400062: Bone044
+    400064: Bone045
+    400066: Bone046
+    400068: Bone047
+    400070: Bone048
+    400072: Bone049
+    400074: Bone050
+    400076: Bone051
+    400078: Bone052
+    400080: Bone053
+    400082: Bone054
+    400084: Bone055
+    400086: Bone056
+    400088: Bone057
+    400090: Bone058
+    400092: Bone059
+    400094: Bone060
+    400096: Bone061
+    400098: Box001
+    400100: Box002
+    400102: Box003
+    400104: Box004
+    400106: Box005
+    400108: Box006
+    400110: Box007
+    400112: Box008
+    400114: Box009
+    400116: Box010
+    400118: Box011
+    400120: Box012
+    400122: Box013
+    400124: Box014
+    400126: Box015
+    400128: Box016
+    400130: Box017
+    400132: Box018
+    400134: Box020
+    400136: Chest_left
+    400138: Chest_right
+    400140: IK Chain001
+    400142: IK Chain002
+    400144: IK Chain003
+    400146: IK Chain004
+    400148: Model_1
+    400150: Pelvis
+    2100000: No Name
+    2300000: Box001
+    2300002: Box002
+    2300004: Box003
+    2300006: Box004
+    2300008: Box005
+    2300010: Box006
+    2300012: Box007
+    2300014: Box008
+    2300016: Box009
+    2300018: Box010
+    2300020: Box011
+    2300022: Box012
+    2300024: Box013
+    2300026: Box014
+    2300028: Box015
+    2300030: Box016
+    2300032: Box017
+    2300034: Box018
+    3300000: Box001
+    3300002: Box002
+    3300004: Box003
+    3300006: Box004
+    3300008: Box005
+    3300010: Box006
+    3300012: Box007
+    3300014: Box008
+    3300016: Box009
+    3300018: Box010
+    3300020: Box011
+    3300022: Box012
+    3300024: Box013
+    3300026: Box014
+    3300028: Box015
+    3300030: Box016
+    3300032: Box017
+    3300034: Box018
+    4300000: Box018
+    4300002: Box017
+    4300004: Box016
+    4300006: Box003
+    4300008: Box002
+    4300010: Box001
+    4300012: Box004
+    4300014: Box005
+    4300016: Box006
+    4300018: Box012
+    4300020: Box013
+    4300022: Box015
+    4300024: Box014
+    4300026: Box007
+    4300028: Box008
+    4300030: Box010
+    4300032: Box009
+    4300034: Box011
+    4300036: Box020
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Box020
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 45
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
