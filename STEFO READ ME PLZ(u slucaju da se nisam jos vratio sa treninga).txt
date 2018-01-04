@@ -1,0 +1,11 @@
+Uglavnom, poceo sam da ubacujem opet ledge i to, poenta ovaj put je da imas 2 child kockice(child od playera), 
+koje ce biti nevidljive, i bice pozicionirane onako kako smo hteli(jedna ukoso gore od njega, druga ispred), 
+i onda izmedji njih da imas 2 ray-a koji ce da budu triggeri za animacije kad se zakucas u zid, 
+i kad pokusavas da se uhvatis za ledge/cliff i tako to. Kocke nece imati svoj collider(ocigledno), 
+vec sam kontao da ih koristimo da bi se lakse ray crtao, a takodje iz njihove pozicije mozes da izvuces quaternione, 
+euler uglove, rotacije, i ostale kul stvari, pa sam kontao da tako to implementiramo(umesto da trazis/pravis rayLenght() metodu(nzm da li to ima uopste(kek))).
+ To cu pokusati da namestim kad dodjem kuci sa treninga.
+
+
+
+btw svidja mi se kako si popravio ovo za trcanje :D
