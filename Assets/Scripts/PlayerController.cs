@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public float walkSpeed = 6f;
-	public float runSpeed = 15f;
+	//public float walkSpeed = 6f;
+	//public float runSpeed = 15f;
 	public float gravity = -25f;
 	public float speedSmoothTime = 0.1f;
 	public float jumpHeight = 5f;
 	[Range(0,1)]
 	public float airControlPercent;
+	float targetSpeed;
+	float animSpeed;
 
 	//moje
 
+	[Range(0, 35)]
+	float zaFormulu;
+
 	Animator Animator;
 	float speedPercent;
+	float speedPercent2;
 	bool uSkoku;
 	bool skocio;
 
@@ -57,10 +63,14 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			uSkoku = true;
 		}
-			
+
+		//"SKOCIO" SE TRIGGERUJE KAD PRITISNES SPACE(I CONTROLLER.ISGROUNDED JE TRUE), A "USKOKU" DOK SI U VAZDUHU(TJ DOK JE CONTROLLER.ISGROUNDED = FALSE)
+
 		if (velocityY == 0 && Input.GetKey (KeyCode.Space)) {
 			skocio = true;
-		} else if(controller.isGrounded){
+		} else if (velocityY > 0) {
+			skocio = false;
+		} else {
 			skocio = false;
 		}
 
@@ -71,7 +81,7 @@ public class PlayerController : MonoBehaviour {
 		Animator.SetBool ("skocio", skocio);
 		Animator.SetBool ("skok", uSkoku);
 
-		float animSpeed = ((running) ? 1 : .5f) * inputDir.magnitude;
+		animSpeed = ((running) ? 35f : 6f) * inputDir.magnitude;
 		Animator.SetFloat ("speedPercent", animSpeed);
 
 		//kraj mojeg
@@ -90,6 +100,22 @@ public class PlayerController : MonoBehaviour {
 			controller.transform.position = Vector3.zero;
 		}
 	}
+
+	/*float SpeedPercentWalk(float wspeed){
+		if (wspeed < 0.5f) {
+			return wspeed + 0.1f;
+		} else {
+			return 0.5f;
+		}
+	}
+
+	float SpeedPercentRun(float rspeed){
+		if (rspeed < 1f) {
+			return rspeed + 0.1f;
+		} else {
+			return 1f;
+		}
+	}*/
 
 	//moje
 	/*void LegdeScan(){
@@ -138,6 +164,25 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}*/
+
+	float formula(float brzina){
+		float rez; 
+		float rez2;
+		if (brzina <= 7f) {
+			rez = 0.08333f * brzina;
+			if (brzina >= 5.9f && brzina < 7f) {
+				return 0.5f;
+			}
+			return rez;
+		} else{
+			rez2 = 0.01724f * brzina + 0.5f;
+			if (rez2 > 1f) {
+				return 1f;
+			}
+			return rez2;
+		}
+	}
+
 	//kraj mojeg
 
 	void LedgeScan(){
@@ -160,9 +205,19 @@ public class PlayerController : MonoBehaviour {
 
 		//Vector3 pocetakDonjegRaya = new Vector3(bla.x, bla.y + 1.75f, bla.z)
 	}
-
-	void drawVector(Ray r){
-		
+    
+	float Walk(float wspeed){
+        if (wspeed < 6f) {
+            return wspeed + 0.2f;
+        }
+        else if ( wspeed >= 6f)
+        {
+            return 6f ;
+        }
+      
+        else {
+            return 0f;
+        }
 	}
 
 	void Move(Vector2 inputDir, bool running){
@@ -172,8 +227,9 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		velocityY += Time.deltaTime * gravity;
-
-		float targetSpeed = ((running) ? runSpeed : walkSpeed) * inputDir.magnitude;
+        float pom;
+        //float targetSpeed = ((running) ? runSpeed : walkSpeed) * inputDir.magnitude;
+        targetSpeed = ((running) ? ((targetSpeed > 35f) ? 35f : targetSpeed +0.8f)  :((targetSpeed > 6f)? ((targetSpeed <=7.3f)?6f:targetSpeed - 1.2f): Walk(targetSpeed))) * inputDir.magnitude;
 		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
 
 		Vector3 velocity = transform.forward * currentSpeed + Vector3.up * velocityY;
@@ -183,6 +239,8 @@ public class PlayerController : MonoBehaviour {
 		if (controller.isGrounded) {
 			velocityY = 0;
 		}
+			
+		Animator.SetFloat ("speedPercent2", formula(targetSpeed));
 	}
 
 	void Jump(){
