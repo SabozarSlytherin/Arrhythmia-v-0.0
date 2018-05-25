@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	
+	//public float walkSpeed = 6f;
+	//public float runSpeed = 15f;
 	public float gravity = -25f;
 	public float speedSmoothTime = 0.1f;
 	public float jumpHeight = 5f;
@@ -13,7 +14,44 @@ public class PlayerController : MonoBehaviour {
 	float targetSpeed;
 	float animSpeed;
 
+	public float velocityY;
+	float speedSmoothVelocity;
+	static float currentSpeed;
+
 	//moje
+
+	//SRCE \/    \/    \/    \/    \/
+	/*
+	public static void beat(float a){
+		if (a <= 0) {
+			Debug.Log ("U ded son. (IMAS 0 OTKUCAJA)");
+			//poziv die() metode ili stagod
+		}else{
+			Debug.Log ("Beats: " + a);
+			a -= formulaZaOtkucaje();
+			beat (a);
+		}
+	}
+
+	static float formulaZaOtkucaje(){
+		return 1f + getRunSpeed();
+	}
+
+	static float getRunSpeed(){
+		if (currentSpeed == 0f) {
+			return 0;
+		} else if(currentSpeed <= 6f){
+			return 0.5f;
+		}else{
+			return 1f;
+		}
+	}
+	*/
+	//SRCE /\    /\    /\    /\    /\
+
+	bool ledgeHor = false;
+	bool ledgeKosi = false;
+	Transform ledgeTransform;
 
 	[Range(0, 35)]
 	float zaFormulu;
@@ -24,14 +62,15 @@ public class PlayerController : MonoBehaviour {
 	bool uSkoku;
 	bool skocio;
 
-	public float ledgeGrabDistance = 1f;
+	public float ledgeGrabDistanceHor = 3.5f;
+	public float ledgeGrabDistanceUkoso = 3f;
 	bool ispredivice = false;
 	bool naivici = false;
-	//kraj mojeg
 
-	public float velocityY;
-	float speedSmoothVelocity;
-	float currentSpeed;
+	//otkucaji za srce
+	public float heartBeats = 50000f;
+
+	//kraj mojeg
 
 	public float turnSmoothTime = 0.2f;
 	public float turnSmoothVelocity;
@@ -39,14 +78,25 @@ public class PlayerController : MonoBehaviour {
 	Transform cameraT;
 	CharacterController controller;
 
+	public float getCurrentSpeed(){
+		return currentSpeed;
+	}
+
 	// Use this for initialization
 	void Start () {
 		cameraT = Camera.main.transform;
 		controller = GetComponent<CharacterController> ();
 
+		//beat (heartBeats);
+
+		/*System.Timers.Timer srceTimer = new System.Timers.Timer ();
+		srceTimer.Elapsed += new System.Timers.ElapsedEventHandler ();
+		srceTimer.Interval=1000;
+		srceTimer.Enabled=true;*/
+
 		Animator = GetComponent<Animator> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -93,76 +143,101 @@ public class PlayerController : MonoBehaviour {
 			Animator.Play ("jump1");
 		}*/
 
-		LedgeScan ();
+		if (Input.GetKey (KeyCode.E)) {
+			LedgeScan ();
+		}
 
 		if (Input.GetKey (KeyCode.K)) {
 			controller.transform.position = Vector3.zero;
 		}
 	}
 
-	/*float SpeedPercentWalk(float wspeed){
-		if (wspeed < 0.5f) {
-			return wspeed + 0.1f;
-		} else {
-			return 0.5f;
-		}
-	}
-
-	float SpeedPercentRun(float rspeed){
-		if (rspeed < 1f) {
-			return rspeed + 0.1f;
-		} else {
-			return 1f;
-		}
-	}*/
-
 	//moje
-	/*void LegdeScan(){
+	public void LedgeScan(){
 
-		Vector3 bla = controller.transform.position;
-		Vector3 bla2 = new Vector3 (bla.x, bla.y + 2, bla.z + 1);
-		Ray r = new Ray (bla, bla2);
+		//Vector iz kojeg krecu rayovi za skeniranje za litice/stvari za koje mozes da se uhvatis
+		Vector3 trenutniTransform = controller.transform.position;
+		Vector3 origin = new Vector3 (trenutniTransform.x, trenutniTransform.y + 6, trenutniTransform.z);
 
-		Vector3 preIvice = new Vector3 (0, -0.5f, -0.5f);
+		//"donji" ray
+		Ray donjiRay = new Ray (origin, transform.forward);
+		Debug.DrawRay (origin, transform.forward, Color.red);
+
+		//"gornji ray"
+		Ray gornjiRay = new Ray (origin, transform.forward + transform.up);
+		Debug.DrawRay (origin, transform.forward + transform.up, Color.blue);
+
+
+		Vector3 preIvice = new Vector3 (0, -2f, -2f);
 		Vector3 nakonIvice = new Vector3 (0, 1, 0);
 		Quaternion NormalnaRotacija = controller.transform.rotation;
-		Quaternion RotacijaNaIvici = Quaternion.Euler (bla.x-20, bla.y, bla.z);
+		Quaternion RotacijaNaIvici = Quaternion.Euler (origin.x - 20, origin.y, origin.z);
 
-		float pom = velocityY;
-
-		RaycastHit hit;
-
-		if (Physics.Raycast(r, out hit,ledgeGrabDistance)) {
-			if (hit.collider.tag == "Ledge") {
-				Debug.Log ("Ispred tebe se nalazi ivica!");
+		//float pom = velocityY;
+		RaycastHit hitDonji;
+		if (Physics.Raycast (donjiRay, out hitDonji, ledgeGrabDistanceHor)) {
+			if (hitDonji.collider.tag == "Ledge") {
+				Debug.Log ("Ispred tebe se nalazi ivica!(DONJI ray)");
 				ispredivice = true;
-			}
-			if (ispredivice && Input.GetKey (KeyCode.E)) {
-				Debug.Log ("Drzis se za ivicu");
-				naivici = true;
+				ledgeHor = true;
+				ledgeKosi = false;
+			} else {
 				ispredivice = false;
-
-				if (naivici) {
-					velocityY = 0;
-					controller.transform.SetPositionAndRotation (hit.transform.position + new Vector3(bla.x, -1, -1), RotacijaNaIvici);
-					controller.transform.gameObject.transform.position = hit.transform.position + preIvice;
-					if (Input.GetKey (KeyCode.R)) {
-						controller.transform.position = hit.collider.transform.position + nakonIvice;
-						controller.transform.rotation = NormalnaRotacija;
-					}
-				} else {
-					controller.transform.rotation = NormalnaRotacija;
-					velocityY = pom;
-				}
-				// /*velocityY = 0;
-				controller.transform.SetPositionAndRotation (bla, RotacijaNaIvici);
-				// controller.transform.position = hit.collider.transform.position + preIvice;
-			}else{
-				naivici = false;
-				controller.transform.rotation = NormalnaRotacija;
 			}
 		}
-	}*/
+
+		RaycastHit hitGornji;
+		if (Physics.Raycast (gornjiRay, out hitGornji, ledgeGrabDistanceUkoso)) {
+			if (hitGornji.collider.tag == "Ledge") {
+				Debug.Log ("Ispred tebe se nalazi ivica!(GORNJI Ray)");
+				ispredivice = true;
+				ledgeKosi = true;
+				ledgeHor = false;
+			} else {
+				ispredivice = false;
+			}
+		}
+
+		if (Input.GetKey (KeyCode.E) && (ledgeHor && !(ledgeKosi))) {
+			//ledgeTransform = new Vector3 (hitDonji.collider.gameObject.transform.position.x, hitDonji.collider.gameObject.transform.position.y, hitDonji.collider.gameObject.transform.position.z);
+			Debug.Log ("vracam DONJI");
+			ledgeTransform = hitDonji.transform;
+			ledgeHor = false;
+			ledgeKosi = false;
+		}
+
+		if (Input.GetKey (KeyCode.E) && (ledgeKosi && !(ledgeHor))) {
+			Debug.Log ("vracam GORNJI");
+			ledgeTransform = hitGornji.transform;
+			ledgeHor = false;
+			ledgeKosi = false;
+		}
+
+		if (ispredivice && Input.GetKey (KeyCode.E)) {
+			Debug.Log ("Drzis se za ivicu");
+			naivici = true;
+			ispredivice = false;
+			if (naivici && Input.GetKey (KeyCode.E)) {
+				velocityY = 0;
+				controller.transform.position = ledgeTransform.position + new Vector3 (0, -1, 0);
+				Animator.Play ("hang1");
+				bool visi = Animator.GetBool ("visi");
+				Animator.SetBool ("visi", visi);
+				/*if (Input.GetKey (KeyCode.R)) {
+					controller.transform.position = ledgeTransform.GetComponent<Collider>().transform.position + nakonIvice;
+					controller.transform.rotation = NormalnaRotacija;
+				}
+			} else {
+				controller.transform.rotation = NormalnaRotacija;
+			}
+			velocityY = 0;
+			controller.transform.SetPositionAndRotation (origin, RotacijaNaIvici);
+			// controller.transform.position = hit.collider.transform.position + preIvice;*/
+			} else {
+				naivici = false;
+			}
+		}
+	}
 
 	float formula(float brzina){
 		float rez; 
@@ -184,12 +259,12 @@ public class PlayerController : MonoBehaviour {
 
 	//kraj mojeg
 
-	void LedgeScan(){
+	/*void LedgeScan(){
 
-		/*Vector3 bla = controller.transform.position;
+		Vector3 bla = controller.transform.position;
 		Vector3 pocetakGornjegRaya = new Vector3 (bla.x, bla.y + 1.75f, bla.z);
 		Vector3 krajGornjegRaya = new Vector3 (bla.x, bla.y + 3.05f, bla.z + 1);
-		Ray gornjiRay = new Ray (pocetakGornjegRaya, new Vector3 (bla.x, bla.y + 1.3f, bla.z + 1f));*/
+		Ray gornjiRay = new Ray (pocetakGornjegRaya, new Vector3 (bla.x, bla.y + 1.3f, bla.z + 1f));
 
 		Vector3 bla = controller.transform.position;
 		Vector3 v1Kraj = new Vector3 (bla.x, bla.y + 1.3f, bla.z + 1f);
@@ -203,40 +278,20 @@ public class PlayerController : MonoBehaviour {
 		Debug.DrawRay (bla, v2Kraj, Color.red);
 
 		//Vector3 pocetakDonjegRaya = new Vector3(bla.x, bla.y + 1.75f, bla.z)
-	}
-     float wspeed_const = 6.0f;
-     float rspeed_const = 35.0f;
+	}*/
 
-    float IncrementWspeed(float wspeed_const_add, float add_amount)
-    {
-        if (Input.GetKey(KeyCode.Z))
-        {
-            wspeed_const_add = add_amount;
-        }
-        return wspeed_const_add;
-    }
+	float Walk(float wspeed){
+		if (wspeed < 6f) {
+			return wspeed + 0.2f;
+		}
+		else if ( wspeed >= 6f)
+		{
+			return 6f ;
+		}
 
-    float IncrementRspeed(float rspeed_const_add, float add_amount)
-    {
-        if (Input.GetKey(KeyCode.Z))
-        {
-            rspeed_const_add = add_amount;
-        }
-        return rspeed_const_add;
-    }
-
-    float Walk(float wspeed){
-        if (wspeed < wspeed_const) {
-            return wspeed + 0.2f;
-        }
-        else if ( wspeed >= wspeed_const)
-        {
-            return wspeed_const ;
-        }
-      
-        else {
-            return 0f;
-        }
+		else {
+			return 0f;
+		}
 	}
 
 	void Move(Vector2 inputDir, bool running){
@@ -244,16 +299,12 @@ public class PlayerController : MonoBehaviour {
 			float targetRotation = Mathf.Atan2 (inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
 			transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
 		}
-        float wspeed_const = 6f + IncrementWspeed(0f, 10f);
-        float rspeed_const = 35f + IncrementRspeed(0f, 20f);
 
-        velocityY += 3*( Time.deltaTime * gravity);
-        float pom;
-        //float targetSpeed = ((running) ? runSpeed : walkSpeed) * inputDir.magnitude;
-        targetSpeed = ((running) ? ((targetSpeed > rspeed_const) ? rspeed_const : targetSpeed +0.8f)  :((targetSpeed > wspeed_const)? 
-            ((targetSpeed <= wspeed_const + (wspeed_const-6f)*1.3f)? wspeed_const:targetSpeed - 1.2f): Walk(targetSpeed))) * inputDir.magnitude;
-      
-        currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
+		velocityY += 3 * (Time.deltaTime * gravity);
+		float pom;
+		//float targetSpeed = ((running) ? runSpeed : walkSpeed) * inputDir.magnitude;
+		targetSpeed = ((running) ? ((targetSpeed > 35f) ? 35f : targetSpeed +0.8f)  :((targetSpeed > 6f)? ((targetSpeed <=7.3f)?6f:targetSpeed - 1.2f): Walk(targetSpeed))) * inputDir.magnitude;
+		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
 
 		Vector3 velocity = transform.forward * currentSpeed + Vector3.up * velocityY;
 		controller.Move (velocity * Time.deltaTime);
@@ -262,14 +313,14 @@ public class PlayerController : MonoBehaviour {
 		if (controller.isGrounded) {
 			velocityY = 0;
 		}
-			
+
 		Animator.SetFloat ("speedPercent2", formula(targetSpeed));
 	}
 
 	void Jump(){
 		if (controller.isGrounded) {
 			Debug.Log ("Sada si u skoku.");
-			float jumpVelocity = 2f*(Mathf.Sqrt (-2 * gravity * jumpHeight));
+			float jumpVelocity = 2.0f * (Mathf.Sqrt (-2 * gravity * jumpHeight));
 			velocityY = jumpVelocity;
 		}
 	}

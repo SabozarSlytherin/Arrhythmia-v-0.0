@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ledge
+  - DonjiRay
   layers:
   - Default
   - TransparentFX
