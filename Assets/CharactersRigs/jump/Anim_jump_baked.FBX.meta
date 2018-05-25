@@ -104,8 +104,8 @@ ModelImporter:
     - serializedVersion: 16
       name: stick_v_1.6
       takeName: stick_v_1.6
-      firstFrame: 15
-      lastFrame: 37
+      firstFrame: 14
+      lastFrame: 39
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

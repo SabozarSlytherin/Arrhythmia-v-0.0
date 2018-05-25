@@ -81,6 +81,41 @@ ModelImporter:
     100146: IK Chain004
     100148: Model_1
     100150: Pelvis
+    100152: Bip001
+    100154: Bip001 Footsteps
+    100156: Bip001 Head
+    100158: Bip001 HeadNub
+    100160: Bip001 L Calf
+    100162: Bip001 L Clavicle
+    100164: Bip001 L Finger0
+    100166: Bip001 L Finger0Nub
+    100168: Bip001 L Foot
+    100170: Bip001 L Forearm
+    100172: Bip001 L Hand
+    100174: Bip001 L Thigh
+    100176: Bip001 L Toe0
+    100178: Bip001 L Toe0Nub
+    100180: Bip001 L UpperArm
+    100182: Bip001 Neck
+    100184: Bip001 Pelvis
+    100186: Bip001 R Calf
+    100188: Bip001 R Clavicle
+    100190: Bip001 R Finger0
+    100192: Bip001 R Finger0Nub
+    100194: Bip001 R Foot
+    100196: Bip001 R Forearm
+    100198: Bip001 R Hand
+    100200: Bip001 R Thigh
+    100202: Bip001 R Toe0
+    100204: Bip001 R Toe0Nub
+    100206: Bip001 R UpperArm
+    100208: Bip001 Spine
+    100210: Bip001 Spine1
+    100212: Bone001
+    100214: Bone002
+    100216: Bone003
+    100218: Bone004
+    100220: Group001
     400000: //RootNode
     400002: B_bicep_left
     400004: b_bicep_right
@@ -157,6 +192,41 @@ ModelImporter:
     400146: IK Chain004
     400148: Model_1
     400150: Pelvis
+    400152: Bip001
+    400154: Bip001 Footsteps
+    400156: Bip001 Head
+    400158: Bip001 HeadNub
+    400160: Bip001 L Calf
+    400162: Bip001 L Clavicle
+    400164: Bip001 L Finger0
+    400166: Bip001 L Finger0Nub
+    400168: Bip001 L Foot
+    400170: Bip001 L Forearm
+    400172: Bip001 L Hand
+    400174: Bip001 L Thigh
+    400176: Bip001 L Toe0
+    400178: Bip001 L Toe0Nub
+    400180: Bip001 L UpperArm
+    400182: Bip001 Neck
+    400184: Bip001 Pelvis
+    400186: Bip001 R Calf
+    400188: Bip001 R Clavicle
+    400190: Bip001 R Finger0
+    400192: Bip001 R Finger0Nub
+    400194: Bip001 R Foot
+    400196: Bip001 R Forearm
+    400198: Bip001 R Hand
+    400200: Bip001 R Thigh
+    400202: Bip001 R Toe0
+    400204: Bip001 R Toe0Nub
+    400206: Bip001 R UpperArm
+    400208: Bip001 Spine
+    400210: Bip001 Spine1
+    400212: Bone001
+    400214: Bone002
+    400216: Bone003
+    400218: Bone004
+    400220: Group001
     2100000: No Name
     2300000: Box001
     2300002: Box002
@@ -228,7 +298,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: <Root Transform>
-    rigImportErrors: 
+    rigImportErrors: "Avatar creation failed:\n\tTransform 'b_pelvis' for human bone
+      'Hips' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 

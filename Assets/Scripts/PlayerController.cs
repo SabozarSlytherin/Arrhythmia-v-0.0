@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	//public float walkSpeed = 6f;
-	//public float runSpeed = 15f;
+	
 	public float gravity = -25f;
 	public float speedSmoothTime = 0.1f;
 	public float jumpHeight = 5f;
@@ -205,14 +204,34 @@ public class PlayerController : MonoBehaviour {
 
 		//Vector3 pocetakDonjegRaya = new Vector3(bla.x, bla.y + 1.75f, bla.z)
 	}
-    
-	float Walk(float wspeed){
-        if (wspeed < 6f) {
+     float wspeed_const = 6.0f;
+     float rspeed_const = 35.0f;
+
+    float IncrementWspeed(float wspeed_const_add, float add_amount)
+    {
+        if (Input.GetKey(KeyCode.Z))
+        {
+            wspeed_const_add = add_amount;
+        }
+        return wspeed_const_add;
+    }
+
+    float IncrementRspeed(float rspeed_const_add, float add_amount)
+    {
+        if (Input.GetKey(KeyCode.Z))
+        {
+            rspeed_const_add = add_amount;
+        }
+        return rspeed_const_add;
+    }
+
+    float Walk(float wspeed){
+        if (wspeed < wspeed_const) {
             return wspeed + 0.2f;
         }
-        else if ( wspeed >= 6f)
+        else if ( wspeed >= wspeed_const)
         {
-            return 6f ;
+            return wspeed_const ;
         }
       
         else {
@@ -225,12 +244,16 @@ public class PlayerController : MonoBehaviour {
 			float targetRotation = Mathf.Atan2 (inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
 			transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
 		}
+        float wspeed_const = 6f + IncrementWspeed(0f, 10f);
+        float rspeed_const = 35f + IncrementRspeed(0f, 20f);
 
-		velocityY += Time.deltaTime * gravity;
+        velocityY += 3*( Time.deltaTime * gravity);
         float pom;
         //float targetSpeed = ((running) ? runSpeed : walkSpeed) * inputDir.magnitude;
-        targetSpeed = ((running) ? ((targetSpeed > 35f) ? 35f : targetSpeed +0.8f)  :((targetSpeed > 6f)? ((targetSpeed <=7.3f)?6f:targetSpeed - 1.2f): Walk(targetSpeed))) * inputDir.magnitude;
-		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
+        targetSpeed = ((running) ? ((targetSpeed > rspeed_const) ? rspeed_const : targetSpeed +0.8f)  :((targetSpeed > wspeed_const)? 
+            ((targetSpeed <= wspeed_const + (wspeed_const-6f)*1.3f)? wspeed_const:targetSpeed - 1.2f): Walk(targetSpeed))) * inputDir.magnitude;
+      
+        currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
 
 		Vector3 velocity = transform.forward * currentSpeed + Vector3.up * velocityY;
 		controller.Move (velocity * Time.deltaTime);
@@ -246,7 +269,7 @@ public class PlayerController : MonoBehaviour {
 	void Jump(){
 		if (controller.isGrounded) {
 			Debug.Log ("Sada si u skoku.");
-			float jumpVelocity = Mathf.Sqrt (-2 * gravity * jumpHeight);
+			float jumpVelocity = 2f*(Mathf.Sqrt (-2 * gravity * jumpHeight));
 			velocityY = jumpVelocity;
 		}
 	}

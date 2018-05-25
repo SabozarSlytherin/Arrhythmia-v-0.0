@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arrhythmia-v-0.0", "Arrhythmia-v-0.0.csproj", "{44B3FC9D-4D3F-51F2-30AF-FFB7E1B14E03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44B3FC9D-4D3F-51F2-30AF-FFB7E1B14E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44B3FC9D-4D3F-51F2-30AF-FFB7E1B14E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44B3FC9D-4D3F-51F2-30AF-FFB7E1B14E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44B3FC9D-4D3F-51F2-30AF-FFB7E1B14E03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

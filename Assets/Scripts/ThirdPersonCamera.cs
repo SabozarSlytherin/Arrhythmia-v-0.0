@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ public class ThirdPersonCamera : MonoBehaviour {
 	Vector3 rotationSmoothVelocity;
 	Vector3 currentRotation;
 
-    
+
 
 	void LateUpdate () {
 		yaw += Input.GetAxis ("Mouse X") * mouseSensitivity;
@@ -37,27 +38,27 @@ public class ThirdPersonCamera : MonoBehaviour {
 	public void DynamicCameraSpeed(PlayerController pc){
 		if (!Input.GetKey (KeyCode.LeftShift)) {
 			if(distanceFromTarget > 10f)
-            {
-                distanceFromTarget = distanceFromTarget - 0.5f;
-            }
-            else
-            {
-                distanceFromTarget = 10f;
-            }
+			{
+				distanceFromTarget = distanceFromTarget - 0.5f;
+			}
+			else
+			{
+				distanceFromTarget = 10f;
+			}
 		} else {
-            if (distanceFromTarget < 15f)
-            {
-                distanceFromTarget = distanceFromTarget + 0.1f;
-            }
-            else
-            {
-                distanceFromTarget = 15f;
-            }
-            
-        }
+			if (distanceFromTarget < 15f)
+			{
+				distanceFromTarget = distanceFromTarget + 0.1f;
+			}
+			else
+			{
+				distanceFromTarget = 15f;
+			}
+
+		}
 	}
-    
-    void Update(){
+
+	void Update(){
 		DynamicCameraSpeed (pc);
 	}
 
